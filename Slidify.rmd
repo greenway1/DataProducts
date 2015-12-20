@@ -1,0 +1,81 @@
+---
+title       : Like my Random Forest Shiny App!
+subtitle    : Or else...
+author      : Ryan Greenway
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Random Forest Shiny Application
+
+You can find my application at
+https://greenway1.shinyapps.io/DataProducts
+
+What it does: Allows you to determine how much better your
+predictions will get with varying samples and more trees in the model
+
+
+ RUN SIMULATIONS!
+ 
+ Machine Learning!
+ 
+ The future is near...
+
+--- .class #id 
+
+## RandomForest Code
+
+The main code for the Random Forest algorithm:
+
+```{r}
+  library(shiny)
+  library(ggplot2)
+  library(caret)
+  library(randomForest)
+  library(AppliedPredictiveModeling)
+  data(segmentationOriginal)
+  set.seed(32324)
+  
+    inTrain <- createDataPartition(y=segmentationOriginal$Class,p=0.6,list=FALSE)
+    training <- segmentationOriginal[inTrain,]
+    testing <- segmentationOriginal[-inTrain,]
+    fit <- randomForest(Class ~ ., data=training, importance=TRUE, ntree=20)
+
+```
+
+--- .class #id
+
+## Prediction and Confusion Matrix
+
+An example of the output:
+
+```{r, echo=FALSE}
+    print(fit)
+```
+
+--- .class #id
+
+## Comparison against our holdout sample
+
+How this compares with our holdout sample:
+
+```{r}
+    predTest <- predict(fit,testing)
+    table(predTest,testing$Class)
+```
+
+
+--- .class #id
+
+
+## Conclusion
+
+That's it!  In shiny you can adjust the sample size from 10% to 90%
+and also the number of trees from 10 to 500.
+
+Enjoy!
