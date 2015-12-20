@@ -1,0 +1,9 @@
+setwd("C:/Users/Ramos/Documents/R/DataProducts/SlidifyProj/shiny_deck")
+library(Rtools)
+library(devtools)
+library(slidify)
+
+options(rpubs.upload.method="internal")
+publish(user = "greenway1", repo = "DataProducts")
+
+publish(title = 'DataProdsGreenway', 'index.html', host = 'rpubs')
