@@ -20,47 +20,38 @@ What it does: Allows you to determine how much better your
 predictions will get with varying samples and more trees in the model
 
 
- RUN SIMULATIONS!
+1. RUN SIMULATIONS!
  
- Machine Learning!
+2. Machine Learning!
  
- The future is near...
+ The <span style="color:blue; font-weight:bold">future</span> is near...
 
 --- .class #id 
 
 ## RandomForest Code
 
 The main code for the Random Forest algorithm:
-
 ```{r}
-  library(shiny)
-  library(ggplot2)
-  library(caret)
-  library(randomForest)
-  library(AppliedPredictiveModeling)
-  data(segmentationOriginal)
-  set.seed(32324)
-  
+  library(caret); library(randomForest); library(AppliedPredictiveModeling);
+  data(segmentationOriginal); set.seed(32324);
+    
     inTrain <- createDataPartition(y=segmentationOriginal$Class,p=0.6,list=FALSE)
-    training <- segmentationOriginal[inTrain,]
-    testing <- segmentationOriginal[-inTrain,]
+    training <- segmentationOriginal[inTrain,]; testing <- segmentationOriginal[-inTrain,];
     fit <- randomForest(Class ~ ., data=training, importance=TRUE, ntree=20)
-
 ```
 
---- .class #id
+---
 
-## Prediction and Confusion Matrix
+## Results of Machine Learning
 
 An example of the output:
-
 ```{r, echo=FALSE}
     print(fit)
 ```
 
---- .class #id
+---
 
-## Comparison against our holdout sample
+## Conclusion
 
 How this compares with our holdout sample:
 
@@ -69,13 +60,5 @@ How this compares with our holdout sample:
     table(predTest,testing$Class)
 ```
 
-
---- .class #id
-
-
-## Conclusion
-
 That's it!  In shiny you can adjust the sample size from 10% to 90%
-and also the number of trees from 10 to 500.
-
-Enjoy!
+and also the number of trees from 10 to 500. <span style="color:red; font-weight:bold">Enjoy!</span>
